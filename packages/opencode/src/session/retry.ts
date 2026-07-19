@@ -127,6 +127,11 @@ export function retryable(error: Err, provider: string) {
   if (typeof msg === "string") {
     const lower = msg.toLowerCase()
     if (
+      lower.includes("resourceexhausted")
+    ) {
+      return { message: msg }
+    }
+    if (
       lower.includes("rate increased too quickly") ||
       lower.includes("rate limit") ||
       lower.includes("too many requests")
